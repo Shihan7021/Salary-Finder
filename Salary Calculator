@@ -1,0 +1,25 @@
+def calculate_salary(tax_amount):
+    # Tax brackets and rates
+    brackets = [41667, 41667, 41667, 41667,41667, float('inf')]
+    rates = [0.06, 0.12, 0.18, 0.24, 0.30, 0.36]
+
+    remaining_salary = 0
+    for i in range(len(brackets)):
+        current_bracket = brackets[i]
+        current_rate = rates[i]
+        if tax_amount >= current_bracket * current_rate:
+            remaining_salary += current_bracket
+            tax_amount -= current_bracket * current_rate
+        else:
+            remaining_salary += tax_amount / current_rate
+            break
+
+    total_salary = remaining_salary + 100000  # Add the exempted amount
+
+    return total_salary
+
+# Example usage:
+tax_amount = float(input("Enter the tax amount: "))
+salary_amount = calculate_salary(tax_amount)
+
+print(f'The salary for a tax amount of {tax_amount:.2f} is {salary_amount:.2f}')
